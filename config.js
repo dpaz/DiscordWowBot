@@ -22,6 +22,6 @@ module.exports = {
   // More info: https://discordapp.com/developers/docs/topics/permissions
   deleteAfterReply: {
     enabled: true,
-    time: 10000, // In milliseconds
+    time: 300000, // In milliseconds
   }
 };
