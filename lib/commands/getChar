@@ -1,0 +1,42 @@
+var Clapp = require('../modules/clapp-discord');
+var Config = require('../../configuration/config.json');
+var http = require('https');
+
+module.exports = new Clapp.Command({
+  name: "getChar",
+  desc: "get info about a char",
+  fn: (argv, context) => {
+    // This output will be redirected to your app's onReply function
+    var requestBody = Config.defaultApi+'/wow/character/'+Config.defaultRealm+'/'+argv.args.name+'?&locale='+Config.defaultRegion+'&apikey='+Config.wowKey;
+    var text
+    body = http.get(requestBody,function(data){
+      var body = ''
+      data.on('data',function(chunk){
+        body+= chunk;
+      });
+      data.on('end',function(){
+        return body;
+      })
+    });
+
+    return 'GetChar execute '+ response;
+  },
+  args: [
+    {
+      name: 'name',
+      desc: 'name of the character',
+      type: 'string',
+      required: true
+    }
+  ],
+  flags: [
+    {
+      name: 'testflag',
+      desc: 'A test flag',
+      alias: 't',
+      type: 'boolean',
+      default: false
+    }
+  ]
+});
+
